@@ -3,20 +3,16 @@ package com.example.demo.entity.Doctor;
 
 import com.example.demo.entity.Patient.Patient;
 import com.example.demo.entity.User.User;
+import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@RequiredArgsConstructor
 public class Doctor extends User {
 
     @Id
@@ -28,7 +24,6 @@ public class Doctor extends User {
     @Column(name = "last_name")
     private String lastName;
 
-    private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -36,7 +31,8 @@ public class Doctor extends User {
     @Enumerated
     private Gender gender;
 
-    private String specialization;
+    @Enumerated(EnumType.STRING)
+    private DoctorSpecialization specialization;
 
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.REMOVE,CascadeType.PERSIST} )
     @JoinTable(name = "doctors_patients",

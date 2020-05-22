@@ -4,9 +4,11 @@ import com.example.demo.entity.Doctor.Doctor;
 import com.example.demo.entity.Doctor.dto.DoctorDto;
 import com.example.demo.entity.Doctor.dto.DoctorMapper;
 import com.example.demo.entity.Doctor.exceptions.DoctorException.DoctorNotFoundException;
+import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,7 +45,11 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorDto> findBySpecialization(String specialization) {
 
-        List<Doctor> doctorList = doctorRepository.findAllBySpecialization(specialization);
+        DoctorSpecialization doctorSpecialization = DoctorSpecialization.valueOf(specialization);
+
+
+
+        List<Doctor> doctorList = doctorRepository.findAllBySpecialization(doctorSpecialization);
 
         return doctorList.stream()
                 .map(DoctorMapper::mapDoctorToDoctorDto)

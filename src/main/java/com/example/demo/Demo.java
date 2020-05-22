@@ -5,6 +5,7 @@ import com.example.demo.entity.Medicine.Medicine;
 import com.example.demo.entity.Patient.Patient;
 
 import com.example.demo.entity.Visit.Visit;
+import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.Role;
 import com.example.demo.repository.DoctorRepository;
@@ -66,7 +67,7 @@ public class Demo implements CommandLineRunner {
         Doctor doctor=new Doctor();
         doctor.setFirstName("Jan");
         doctor.setLastName("Ogłaza");
-        doctor.setSpecialization("Laryngolog");
+        doctor.setSpecialization(DoctorSpecialization.ANESTESIOLOGITS);
         doctor.setGender(Gender.Male);
         doctor.setLogin("doktor");
         doctor.setPassword(passwordEncoder.encode("doktor"));
@@ -76,7 +77,7 @@ public class Demo implements CommandLineRunner {
         Doctor doctor2=new Doctor();
         doctor2.setFirstName("Anna");
         doctor2.setLastName("Jarosławska");
-        doctor2.setSpecialization("Pediatra");
+        doctor2.setSpecialization(DoctorSpecialization.ALLERGIST);
         doctor2.setGender(Gender.Female);
         doctor2.setLogin("doktor2");
         doctor2.setPassword(passwordEncoder.encode("doktor2"));
@@ -86,7 +87,7 @@ public class Demo implements CommandLineRunner {
         Doctor doctor3=new Doctor();
         doctor3.setFirstName("Adam");
         doctor3.setLastName("Kwaśniak");
-        doctor3.setSpecialization("Kardiolog");
+        doctor3.setSpecialization(DoctorSpecialization.ALLERGIST);
         doctor3.setGender(Gender.Male);
         doctor3.setLogin("doktor3");
         doctor3.setPassword(passwordEncoder.encode("doktor3"));
@@ -121,6 +122,7 @@ public class Demo implements CommandLineRunner {
         patient2.setRole(Role.PATIENT.getValue());
         patient2.setDoctor(doctor);
         patient2.setActive(true);
+        patient2.setEmail("jagoda@o2.pl");
 
         patient2.setMedicineList(List.of(medicine,medicine2,medicine3,medicine4));
 
@@ -142,13 +144,14 @@ public class Demo implements CommandLineRunner {
 
         Visit visit2 = new Visit();
         visit2.setDoctorsOfficeNumber(10);
-        visit2.setVisitDate(LocalDateTime.of(2010, Month.MAY, 5, 1, 1));
+        visit2.setVisitDate(LocalDateTime.of(2020, Month.MAY, 22, 1, 1));
 
 
-        visit.setPatient(patient2);
+        visit2.setPatient(patient2);
+        patient2.setVisits(List.of(visit2));
         //visit2.setPatient(patient);
 
-        patient2.setVisits(List.of(visit));
+        patient2.setVisits(List.of(visit2));
 
         //doctorRepository.save(doctor);
         //patientRepository.save(patient);

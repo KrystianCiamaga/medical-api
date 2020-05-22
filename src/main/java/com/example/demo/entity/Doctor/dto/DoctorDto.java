@@ -1,5 +1,6 @@
 package com.example.demo.entity.Doctor.dto;
 
+import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,6 @@ public class DoctorDto {
 
     private String phoneNumber;
 
-    private String specialization;
+    private DoctorSpecialization specialization;
 
 }

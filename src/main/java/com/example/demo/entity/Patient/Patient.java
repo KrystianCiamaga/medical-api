@@ -13,10 +13,8 @@ import java.util.List;
 
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@RequiredArgsConstructor
 public class Patient extends User {
 
     @Id
@@ -30,7 +28,6 @@ public class Patient extends User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    private String email;
 
     @Enumerated
     private Gender gender;

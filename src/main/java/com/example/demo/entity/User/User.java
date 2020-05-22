@@ -1,18 +1,13 @@
 package com.example.demo.entity.User;
 
 import com.example.demo.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@RequiredArgsConstructor
 public  class User {
 
     @Id
@@ -22,6 +17,8 @@ public  class User {
     private String login;
 
     private String password;
+
+    private String email;
 
     private String role;
 

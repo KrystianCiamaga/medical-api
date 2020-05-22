@@ -36,6 +36,7 @@ public class PatientController {
         patientService.deleteById(id);
     }
 
+
     @PreAuthorize("hasRole('ROLE_DOCTOR')")
     @PostMapping("/medicines/{id}")
     public void addMedicine(@PathVariable Long id, @RequestBody MedicineDto medicineDto){
@@ -51,5 +52,6 @@ public class PatientController {
         return patientService.getMedicines(principal);
 
     }
+
 
 }

@@ -26,10 +26,15 @@ public class DoctorController {
         return doctorService.findAll();
     }
 
+
+
+
     @GetMapping("/{id}")
     public DoctorDto getById(@PathVariable Long id){
         return  doctorService.findById(id);
     }
+
+
 
     @GetMapping("/specialization/{specialization}")
     public List<DoctorDto> getAllBySpecialization(@PathVariable("specialization") String specialization){
