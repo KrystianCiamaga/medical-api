@@ -1,5 +1,6 @@
 package com.example.demo.entity.Patient.service;
 
+import com.example.demo.entity.Address.dto.AddressDto;
 import com.example.demo.entity.Medicine.Medicine;
 import com.example.demo.entity.Medicine.dto.MedicineDto;
 import com.example.demo.entity.Patient.Patient;
@@ -16,7 +17,8 @@ public interface PatientService {
     void deleteById(Long id);
     void addMedicine(Long id, MedicineDto medicineDto);
     List<MedicineDto> getMedicines(Principal principal);
-
+    void deleteMedicine(Long paientId, Long medicineId);
+    AddressDto getUserAddress(Principal principal);
 
 
 

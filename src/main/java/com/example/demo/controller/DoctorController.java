@@ -21,12 +21,10 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
    public List<DoctorDto> getAll(){
         return doctorService.findAll();
     }
-
-
 
 
     @GetMapping("/{id}")

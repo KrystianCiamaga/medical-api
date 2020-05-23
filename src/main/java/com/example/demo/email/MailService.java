@@ -88,7 +88,7 @@ public class MailService {
 
         String url = "http://localhost:8080/users/token?value=" + tokenValue;
 
-        sendMail(user.getEmail(), "Confirm registration", "To confirm registraction click the link below\n"+url, true);
+        sendMail(user.getEmail(), "Confirm registration", "To confirm registration click the link below\n"+url, true);
 
     }
 }

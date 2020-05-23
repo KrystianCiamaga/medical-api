@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Address.dto.AddressDto;
+import com.example.demo.entity.Patient.Patient;
 import com.example.demo.entity.Token;
 import com.example.demo.entity.User.User;
 import com.example.demo.entity.User.service.UserService;
@@ -8,6 +10,8 @@ import com.example.demo.repository.TokenRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/users")
@@ -34,6 +38,17 @@ public class UserController {
         userService.saveUser(user);
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/token")
     public void checkToken(@RequestParam String value){

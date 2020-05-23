@@ -9,7 +9,6 @@ public class PatientNotFoundException extends RuntimeException {
 
     }
 
-
     public PatientNotFoundException() {
 
         super("Could not find patient") ;

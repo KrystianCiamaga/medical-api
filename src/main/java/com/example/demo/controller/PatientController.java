@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Address.dto.AddressDto;
 import com.example.demo.entity.Medicine.dto.MedicineDto;
 import com.example.demo.entity.Patient.dto.PatientDto;
 import com.example.demo.entity.Patient.service.PatientService;
@@ -31,26 +32,40 @@ public class PatientController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     void deleteById(@PathVariable Long id){
         patientService.deleteById(id);
     }
 
 
     @PreAuthorize("hasRole('ROLE_DOCTOR')")
-    @PostMapping("/medicines/{id}")
+    @PostMapping("/add-medicine/{id}")
     public void addMedicine(@PathVariable Long id, @RequestBody MedicineDto medicineDto){
 
         patientService.addMedicine(id,medicineDto);
     }
 
+    @PreAuthorize("hasRole('ROLE_DOCTOR')")
+    @DeleteMapping("/{patientId}/remove-medicine/{medicineId}")
+    public void deleteMedicine(@PathVariable Long patientId, @PathVariable Long medicineId){
+
+        patientService.deleteMedicine(patientId,medicineId);
+    }
+
 
     @PreAuthorize("hasRole('ROLE_PATIENT')")
-    @GetMapping("/medicines")
+    @GetMapping("/all-medicines")
     public List<MedicineDto> getAllPatientMedicines(Principal principal){
 
         return patientService.getMedicines(principal);
 
+    }
+
+    @PreAuthorize("hasRole('ROLE_PATIENT')")
+    @GetMapping("/my-address")
+    public AddressDto getUserAddress(Principal principal){
+
+        return patientService.getUserAddress(principal);
     }
 
 

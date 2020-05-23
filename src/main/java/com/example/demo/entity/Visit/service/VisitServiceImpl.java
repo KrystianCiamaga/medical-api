@@ -6,6 +6,7 @@ import com.example.demo.entity.Visit.dto.VisitMapper;
 import com.example.demo.repository.VisitRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,5 +31,17 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public VisitDto findById(Long id) {
         return null;
+    }
+
+    @Override
+    public List<VisitDto> findVisitsByDate(LocalDate localDate) {
+
+        List<VisitDto> visitDtoList = visitRepository.findAll().stream()
+                .filter(s -> s.getVisitDate().getDayOfYear()==localDate.getDayOfYear())
+                .map(VisitMapper::mapVisitToVisitDto)
+                .collect(Collectors.toList());
+
+        return visitDtoList;
+
     }
 }
