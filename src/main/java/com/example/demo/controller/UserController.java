@@ -1,17 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Address.dto.AddressDto;
-import com.example.demo.entity.Patient.Patient;
-import com.example.demo.entity.Token;
-import com.example.demo.entity.User.User;
-import com.example.demo.entity.User.service.UserService;
-import com.example.demo.repository.PatientRepository;
-import com.example.demo.repository.TokenRepository;
+import com.example.demo.dto.AddressDto;
+import com.example.demo.dto.UserCreateDto;
+import com.example.demo.dto.UserReadDto;
+import com.example.demo.entity.User;
+import com.example.demo.mapper.UserMapper;
+import com.example.demo.service.UserService;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -19,46 +20,41 @@ public class UserController {
 
 
     private final UserService userService;
-    private final TokenRepository tokenRepository;
     private final UserRepository userRepository;
 
-    @Autowired
-    PatientRepository patientRepository;
-
-    public UserController(UserService userService, TokenRepository tokenRepository, UserRepository userRepository, PatientRepository patientRepository) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
-        this.tokenRepository = tokenRepository;
         this.userRepository = userRepository;
-        this.patientRepository = patientRepository;
     }
 
     @PostMapping("/register")
-    public void saveUser(@RequestBody User user) throws Exception {
-
+    public void saveUser(@RequestBody UserCreateDto user) throws Exception {
         userService.saveUser(user);
+    }
 
+    @GetMapping("/all")
+    public List<UserReadDto> getalll() {
+
+        return userRepository.findAll().stream().
+                map(UserMapper::mapUserToUserReadDto)
+                .collect(Collectors.toList());
     }
 
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteUserById(@PathVariable Long id) {
+        userService.deleteUser(id);
+    }
 
 
-
-
-
-
-
-
-
+    @GetMapping("/address")
+    public AddressDto getLoggedUserAddres(Principal principal) {
+        return userService.findLoggedUserAddress(principal);
+    }
 
     @GetMapping("/token")
-    public void checkToken(@RequestParam String value){
-        Token token=tokenRepository.findByValue(value);
-       User user = token.getUser();
-        user.setActive(true);
-        userRepository.save(user);
-
+    public void validToken(@RequestParam String value) {
+        userService.checkToken(value);
     }
-
-
 
 }

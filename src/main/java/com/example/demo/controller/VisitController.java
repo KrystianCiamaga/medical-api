@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Visit.dto.VisitDto;
-import com.example.demo.entity.Visit.service.VisitService;
-import org.springframework.cglib.core.Local;
+import com.example.demo.dto.VisitDto;
+import com.example.demo.service.VisitService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,8 @@ public class VisitController {
     }
 
 
+
+
     @PreAuthorize("hasAnyRole('ROLE_DOCTOR','ROLE_ADMIN')")
     @GetMapping("/all")
     public List<VisitDto> getAllVisits(){
@@ -29,15 +30,15 @@ public class VisitController {
     }
 
 
-    @GetMapping("/date?date")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    public List<VisitDto> getVisitsByDate(
-                                          @RequestParam(name = "date")
-                                          @DateTimeFormat(pattern = "yyyy-MM-dd")
-                                                  LocalDate date){
+    @GetMapping("/date")
+    public List<VisitDto> getvisitsByDate(@RequestParam("value")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate date){
 
-       return visitService.findVisitsByDate(date);
+        return visitService.findVisitsByDate(date);
 
     }
+
+
 
 }

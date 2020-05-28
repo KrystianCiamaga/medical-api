@@ -1,8 +1,8 @@
 package com.example.demo.email;
 
 import com.example.demo.entity.Token;
-import com.example.demo.entity.User.User;
-import com.example.demo.entity.Visit.Visit;
+import com.example.demo.entity.User;
+import com.example.demo.entity.Visit;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.repository.TokenRepository;
 import com.example.demo.repository.VisitRepository;

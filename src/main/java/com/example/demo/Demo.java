@@ -1,17 +1,15 @@
 package com.example.demo;
 
-import com.example.demo.entity.Doctor.Doctor;
-import com.example.demo.entity.Medicine.Medicine;
-import com.example.demo.entity.Patient.Patient;
+import com.example.demo.entity.Address;
+import com.example.demo.entity.Doctor;
+import com.example.demo.entity.Medicine;
+import com.example.demo.entity.Patient;
 
-import com.example.demo.entity.Visit.Visit;
+import com.example.demo.entity.Visit;
 import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.enums.Gender;
 import com.example.demo.enums.Role;
-import com.example.demo.repository.DoctorRepository;
-import com.example.demo.repository.MedicineRepository;
-import com.example.demo.repository.PatientRepository;
-import com.example.demo.repository.VisitRepository;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +38,8 @@ public class Demo implements CommandLineRunner {
     @Autowired
     VisitRepository visitRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
 
 
     @Override
@@ -140,7 +140,7 @@ public class Demo implements CommandLineRunner {
 
         Visit visit = new Visit();
         visit.setDoctorsOfficeNumber(10);
-        visit.setVisitDate(LocalDateTime.of(2020, Month.APRIL, 14, 1, 1));
+        visit.setVisitDate(LocalDateTime.of(2020, Month.MAY, 22, 1, 1));
 
         Visit visit2 = new Visit();
         visit2.setDoctorsOfficeNumber(10);
@@ -148,27 +148,34 @@ public class Demo implements CommandLineRunner {
 
 
         visit2.setPatient(patient2);
-        patient2.setVisits(List.of(visit2));
+
+        visit.setPatient(patient2);
+
+        patient2.setVisits(List.of(visit2,visit));
         //visit2.setPatient(patient);
 
-        patient2.setVisits(List.of(visit2));
+        patient2.setVisits(List.of(visit2,visit));
 
         //doctorRepository.save(doctor);
         //patientRepository.save(patient);
+
+
+        Address address = new Address();
+        address.setCity("Iwaniska");
+        address.setZippCode("113636");
+        address.setHouseNumber("numer domu");
+
+
+
+
+        doctor2.setAddress(address);
+        addressRepository.save(address);
 
         doctorRepository.save(doctor2);
 
 
         //patientRepository.save(patient);
         patientRepository.save(patient2);
-
-
-
-
-
-
-
-
 
 
     }

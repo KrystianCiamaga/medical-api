@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Doctor.dto.DoctorDto;
-import com.example.demo.entity.Doctor.service.DoctorService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.DoctorDto;
+import com.example.demo.service.DoctorService;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/doctors")
@@ -33,9 +30,8 @@ public class DoctorController {
     }
 
 
-
-    @GetMapping("/specialization/{specialization}")
-    public List<DoctorDto> getAllBySpecialization(@PathVariable("specialization") String specialization){
+    @GetMapping("/specialization")
+    public List<DoctorDto> getAllBySpecialization(@RequestParam("value") String specialization){
 
         return doctorService.findBySpecialization(specialization);
     }

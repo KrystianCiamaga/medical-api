@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Address.dto.AddressDto;
-import com.example.demo.entity.Medicine.dto.MedicineDto;
-import com.example.demo.entity.Patient.dto.PatientDto;
-import com.example.demo.entity.Patient.service.PatientService;
+import com.example.demo.dto.AddressDto;
+import com.example.demo.dto.MedicineDto;
+import com.example.demo.dto.PatientDto;
+import com.example.demo.service.PatientService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +28,8 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public PatientDto getById(@PathVariable Long id){
-        return patientService.findById(id);
-    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/delete/{id}")
-    void deleteById(@PathVariable Long id){
-        patientService.deleteById(id);
+        return patientService.findById(id);
     }
 
 
@@ -55,18 +50,13 @@ public class PatientController {
 
     @PreAuthorize("hasRole('ROLE_PATIENT')")
     @GetMapping("/all-medicines")
-    public List<MedicineDto> getAllPatientMedicines(Principal principal){
+    public List<MedicineDto> getAllLoggedPatientMedicines(Principal principal){
 
-        return patientService.getMedicines(principal);
+        return patientService.getLoggedPatientMedicines(principal);
 
     }
 
-    @PreAuthorize("hasRole('ROLE_PATIENT')")
-    @GetMapping("/my-address")
-    public AddressDto getUserAddress(Principal principal){
 
-        return patientService.getUserAddress(principal);
-    }
 
 
 }
