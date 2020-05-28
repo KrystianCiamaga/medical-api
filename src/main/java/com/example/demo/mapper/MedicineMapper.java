@@ -2,31 +2,30 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.MedicineDto;
 import com.example.demo.entity.Medicine;
+import org.modelmapper.ModelMapper;
 
 public class MedicineMapper {
 
 
     public static MedicineDto mapMedicineToMedicineDto(Medicine medicine){
 
+        ModelMapper modelMapper = new ModelMapper();
 
-        MedicineDto medicineDto = new MedicineDto();
 
         if(medicine != null) {
-            medicineDto.setName(medicine.getName());
-            medicineDto.setDose(medicine.getDose());
+            return modelMapper.map(medicine,MedicineDto.class);
+
         }
 
-        return medicineDto;
+        return null;
     }
 
 
     public static Medicine mapMedicineDtoToMedicine(Medicine medicine,MedicineDto medicineDto){
 
+        ModelMapper modelMapper = new ModelMapper();
 
-        medicine.setName(medicineDto.getName());
-        medicine.setDose(medicineDto.getDose());
-
-        return medicine;
+        return modelMapper.map(medicineDto,Medicine.class);
 
     }
 

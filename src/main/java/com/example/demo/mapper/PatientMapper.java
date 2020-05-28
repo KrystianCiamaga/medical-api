@@ -1,7 +1,9 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.DoctorDto;
 import com.example.demo.entity.Patient;
 import com.example.demo.dto.PatientDto;
+import org.modelmapper.ModelMapper;
 
 public class PatientMapper {
 
@@ -9,19 +11,7 @@ public class PatientMapper {
 
     public static PatientDto mapPatientToPatientDto(Patient patient){
 
-        PatientDto patientDto = new PatientDto();
-
-        if(patient.getId() != null) {
-            patientDto.setFirstName(patient.getFirstName());
-           // patientDto.setLastName(patient.getLastName());
-            patientDto.setEmail(patient.getEmail());
-            patientDto.setGender(patient.getGender());
-            patientDto.setPesel(patient.getPesel());
-            patientDto.setPhoneNumber(patient.getPhoneNumber());
-        }
-
-
-        return patientDto;
+        return new ModelMapper().map(patient, PatientDto.class);
 
     }
 

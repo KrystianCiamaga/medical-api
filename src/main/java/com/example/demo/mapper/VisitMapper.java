@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.VisitDto;
 import com.example.demo.entity.Visit;
+import org.modelmapper.ModelMapper;
 
 public class VisitMapper {
 
@@ -9,16 +10,14 @@ public class VisitMapper {
 
     public static VisitDto mapVisitToVisitDto(Visit visit){
 
-        VisitDto visitDto = new VisitDto();
+
 
         if(visit !=null){
 
-            visitDto.setPatientDto(PatientMapper.mapPatientToPatientDto(visit.getPatient()));
-            visitDto.setVisitDate(visit.getVisitDate());
-            visitDto.setDoctorsOfficeNumber(visit.getDoctorsOfficeNumber());
+           return new ModelMapper().map(visit,VisitDto.class);
 
         }
-        return visitDto;
+        return null;
     }
 
 /*

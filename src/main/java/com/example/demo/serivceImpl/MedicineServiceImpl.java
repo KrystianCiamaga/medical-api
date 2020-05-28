@@ -8,7 +8,6 @@ import com.example.demo.service.MedicineService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +31,8 @@ public class MedicineServiceImpl implements MedicineService {
 
         return MedicineMapper.mapMedicineToMedicineDto(medicineRepository.findById(id).
                 orElseThrow(() -> new NotFoundException("Could not find medicine with id: "+id)));
+
+
     }
 
     @Override

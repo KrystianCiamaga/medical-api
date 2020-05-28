@@ -2,13 +2,20 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.DoctorDto;
 import com.example.demo.entity.Doctor;
+import org.modelmapper.ModelMapper;
 
 public class DoctorMapper {
 
 
     public static DoctorDto mapDoctorToDoctorDto(Doctor doctor){
 
-        DoctorDto doctorDto = new DoctorDto();
+        ModelMapper modelMapper = new ModelMapper();
+
+
+        return modelMapper.map(doctor,DoctorDto.class);
+
+
+      /*  DoctorDto doctorDto = new DoctorDto();
 
         if(doctor !=null){
 
@@ -20,7 +27,7 @@ public class DoctorMapper {
             doctorDto.setSpecialization(doctor.getSpecialization());
         }
         return doctorDto;
-
+*/
     }
 
     public static Doctor mapDoctorDtoToDoctor(Doctor doctor,DoctorDto doctorDto){

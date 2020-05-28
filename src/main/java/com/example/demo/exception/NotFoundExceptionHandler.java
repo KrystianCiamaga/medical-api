@@ -14,14 +14,13 @@ public class NotFoundExceptionHandler {
     @ExceptionHandler(value = NotFoundException.class)
     public ResponseEntity<Object> notFoundExceptionHandler(NotFoundException ex){
 
-        HttpStatus notFound = HttpStatus.NOT_FOUND;
 
         ApiException apiException = new ApiException(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND,
                 ZonedDateTime.now()
         );
-        return new ResponseEntity<>(apiException,notFound);
+        return new ResponseEntity<>(apiException,apiException.getHttpStatus());
 
     }
 }
