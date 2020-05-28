@@ -11,7 +11,6 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class NotFoundExceptionHandler {
 
-
     @ExceptionHandler(value = NotFoundException.class)
     public ResponseEntity<Object> notFoundExceptionHandler(NotFoundException ex){
 
@@ -21,9 +20,7 @@ public class NotFoundExceptionHandler {
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND,
                 ZonedDateTime.now()
-
         );
-
         return new ResponseEntity<>(apiException,notFound);
 
     }

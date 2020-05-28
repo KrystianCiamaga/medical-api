@@ -47,12 +47,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientDto findById(Long id) {
 
-        Optional<Patient> patient = patientRepository.findById(id);
-
-        return PatientMapper.mapPatientToPatientDto(patient.orElseThrow(() ->
-                new NotFoundException("Could not find patient with id: "+id)));
+        return PatientMapper.mapPatientToPatientDto(patientRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id)));
     }
-
 
 
     @Override
@@ -61,10 +58,10 @@ public class PatientServiceImpl implements PatientService {
         Medicine medicine = new Medicine();
         MedicineMapper.mapMedicineDtoToMedicine(medicine, medicineDto);
 
-        Optional<Patient> patient = Optional.ofNullable(patientRepository.
-                findById(id).orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id)));
+        Patient patient = patientRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id));
 
-        patient.get().getMedicineList().add(medicine);
+        patient.getMedicineList().add(medicine);
 
         medicineRepository.save(medicine);
 
@@ -83,13 +80,15 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deleteMedicine(Long id, Long medicineId) {
 
-        Optional<Patient> patient = Optional.ofNullable(patientRepository.
-                findById(id).orElseThrow(() ->  new NotFoundException("Could not find patient with id: "+id)));
+        Patient patient = patientRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id));
 
-        Optional<Medicine> medicine = medicineRepository.findById(medicineId);
-        patient.get().getMedicineList().remove(medicine.get());
+        Medicine medicine = medicineRepository.findById(medicineId)
+                .orElseThrow(() -> new NotFoundException("Could not find medicine with id:"+medicineId));
 
-        patientRepository.save(patient.get());
+        patient.getMedicineList().remove(medicine);
+
+        patientRepository.save(patient);
 
 
     }

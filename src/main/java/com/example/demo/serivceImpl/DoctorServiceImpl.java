@@ -37,18 +37,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDto findById(Long id) {
 
-        Optional<Doctor> doctor = Optional.ofNullable(doctorRepository.
-                findById(id).orElseThrow(() -> new NotFoundException("Could not find doctor with id: "+id)));
-
-        return DoctorMapper.mapDoctorToDoctorDto(doctor.get());
+        return DoctorMapper.mapDoctorToDoctorDto(doctorRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Could not find doctor with id: "+id)));
     }
 
     @Override
     public List<DoctorDto> findBySpecialization(String specialization) {
 
         DoctorSpecialization doctorSpecialization = DoctorSpecialization.valueOf(specialization);
-
-
 
         List<Doctor> doctorList = doctorRepository.findAllBySpecialization(doctorSpecialization);
 

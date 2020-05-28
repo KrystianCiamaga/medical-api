@@ -30,9 +30,8 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public MedicineDto findById(Long id) {
 
-        Optional<Medicine> medicine = Optional.ofNullable(medicineRepository.findById(id).orElseThrow(() -> new NotFoundException("Could not find medicine with id: "+id)));
-
-        return MedicineMapper.mapMedicineToMedicineDto(medicine.get());
+        return MedicineMapper.mapMedicineToMedicineDto(medicineRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Could not find medicine with id: "+id)));
     }
 
     @Override
