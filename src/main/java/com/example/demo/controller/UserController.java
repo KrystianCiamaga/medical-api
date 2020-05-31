@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 
@@ -32,25 +32,7 @@ public class UserController {
         userService.saveUser(user);
     }
 
-    @GetMapping("/all")
-    public List<UserReadDto> getalll() {
 
-        return userRepository.findAll().stream().
-                map(UserMapper::mapUserToUserReadDto)
-                .collect(Collectors.toList());
-    }
-
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteUserById(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
-
-    @GetMapping("/address")
-    public AddressDto getLoggedUserAddres(Principal principal) {
-        return userService.findLoggedUserAddress(principal);
-    }
 
     @GetMapping("/token")
     public void validToken(@RequestParam String value) {

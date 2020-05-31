@@ -1,14 +1,17 @@
 package com.example.demo.serivceImpl;
 
+import com.example.demo.dto.AddressDto;
 import com.example.demo.entity.Doctor;
 import com.example.demo.dto.DoctorDto;
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.mapper.AddressMapper;
 import com.example.demo.mapper.DoctorMapper;
 import com.example.demo.service.DoctorService;
 import com.example.demo.enums.DoctorSpecialization;
 import com.example.demo.repository.DoctorRepository;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,5 +54,13 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorList.stream()
                 .map(DoctorMapper::mapDoctorToDoctorDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public AddressDto findLoggedDoctorAddress(Principal principal) {
+
+        Doctor doctor = doctorRepository.findByLogin(principal.getName());
+
+        return AddressMapper.mapAddressToAddressDto(doctor.getAddress());
     }
 }

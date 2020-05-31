@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/medicines")
+@RequestMapping("/api/medicines")
 public class MedicineController {
 
     private final MedicineService medicineService;
@@ -19,14 +19,13 @@ public class MedicineController {
         this.medicineService = medicineService;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_DOCTOR','ROLE_ADMIN')")
+
     @GetMapping
     public List<MedicineDto> getAll(){
 
         return medicineService.findAll();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_DOCTOR','ROLE_ADMIN')")
     @GetMapping("/{id}")
     public MedicineDto getById(@PathVariable Long id){
 

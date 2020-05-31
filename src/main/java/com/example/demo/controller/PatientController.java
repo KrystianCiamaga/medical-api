@@ -11,7 +11,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/api/patients")
 public class PatientController {
 
 
@@ -47,13 +47,16 @@ public class PatientController {
         patientService.deleteMedicine(patientId,medicineId);
     }
 
-
-    @PreAuthorize("hasRole('ROLE_PATIENT')")
-    @GetMapping("/all-medicines")
+    @GetMapping("/accounts/medicines")
     public List<MedicineDto> getAllLoggedPatientMedicines(Principal principal){
 
         return patientService.getLoggedPatientMedicines(principal);
 
+    }
+
+    @GetMapping("/accounts/address")
+    public AddressDto getLoggedPatientAddress(Principal principal){
+        return patientService.findLoggedPatientAddres(principal);
     }
 
 

@@ -36,13 +36,6 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public void deleteUser(Long id) {
-       // Optional<User> user = Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id)));
-
-        doctorRepository.deleteById(id);
-
-    }
 
     @Override
     public void saveUser(UserCreateDto user) throws Exception {
@@ -73,15 +66,5 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public AddressDto findLoggedUserAddress(Principal principal) {
-
-        User user = userRepository.findByLogin(principal.getName());
-
-        UserReadDto userReadDto = UserMapper.mapUserToUserReadDto(user);
-
-        return userReadDto.getAddressDto();
-
-    }
 
 }

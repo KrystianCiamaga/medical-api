@@ -1,8 +1,10 @@
 package com.example.demo.serivceImpl;
 
+import com.example.demo.dto.AddressDto;
 import com.example.demo.entity.Medicine;
 import com.example.demo.dto.MedicineDto;
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.mapper.AddressMapper;
 import com.example.demo.mapper.MedicineMapper;
 import com.example.demo.entity.Patient;
 import com.example.demo.dto.PatientDto;
@@ -75,6 +77,14 @@ public class PatientServiceImpl implements PatientService {
                 .map(MedicineMapper::mapMedicineToMedicineDto)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public AddressDto findLoggedPatientAddres(Principal principal) {
+
+        Patient patient = patientRepository.findByLogin(principal.getName());
+
+        return AddressMapper.mapAddressToAddressDto(patient.getAddress());
     }
 
     @Override

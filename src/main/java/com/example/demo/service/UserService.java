@@ -11,10 +11,9 @@ import java.security.Principal;
 public interface UserService {
 
 
-    void deleteUser(Long id);
+
     void saveUser(UserCreateDto user) throws Exception;
     void checkToken(String token);
-    AddressDto findLoggedUserAddress(Principal principal);
 
 
 
