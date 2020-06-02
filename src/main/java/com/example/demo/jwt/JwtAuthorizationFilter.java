@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -40,6 +41,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         Authentication authentication = getUsernamePasswordAuthentication(request);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
 
         chain.doFilter(request,response);
 

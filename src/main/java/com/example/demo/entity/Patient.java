@@ -20,7 +20,7 @@ public class Patient extends User {
             joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "vistit_id"))
     private List<Visit> visits;
 
-    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinTable(name = "patients_medicines",
             joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "medicine_id"))
     private List<Medicine> medicineList;

@@ -8,9 +8,13 @@ public class AddressMapper {
 
     public static Address mapAddressDtoToAddress(Address address, AddressDto addressDto) {
 
-        address.setCity(addressDto.getCity());
-        address.setHouseNumber(addressDto.getHouseNumber());
-        address.setZippCode(addressDto.getZippCode());
+        if(address==null)
+            address=new Address();
+
+            address.setCity(addressDto.getCity());
+            address.setHouseNumber(addressDto.getHouseNumber());
+            address.setZippCode(addressDto.getZippCode());
+
 
         return address;
     }

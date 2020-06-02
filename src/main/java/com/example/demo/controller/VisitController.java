@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,8 +23,6 @@ public class VisitController {
 
 
 
-
-    @PreAuthorize("hasAnyRole('ROLE_DOCTOR','ROLE_ADMIN')")
     @GetMapping("/all")
     public List<VisitDto> getAllVisits(){
         return visitService.findAll();
@@ -37,6 +36,11 @@ public class VisitController {
 
         return visitService.findVisitsByDate(date);
 
+    }
+
+    @GetMapping("/showVisits")
+    public List<VisitDto> getLoggedPatientVisits(Principal principal){
+        return visitService.getLoggedPatientVisits(principal);
     }
 
 

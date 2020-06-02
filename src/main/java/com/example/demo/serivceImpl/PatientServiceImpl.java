@@ -54,55 +54,5 @@ public class PatientServiceImpl implements PatientService {
     }
 
 
-    @Override
-    public void addMedicine(Long id, MedicineDto medicineDto) {
-
-        Medicine medicine = new Medicine();
-        MedicineMapper.mapMedicineDtoToMedicine(medicine, medicineDto);
-
-        Patient patient = patientRepository.findById(id).
-                orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id));
-
-        patient.getMedicineList().add(medicine);
-
-        medicineRepository.save(medicine);
-
-    }
-
-    @Override
-    public List<MedicineDto> getLoggedPatientMedicines(Principal principal) {
-
-        Patient patient = patientRepository.findByLogin(principal.getName());
-        return patient.getMedicineList().stream()
-                .map(MedicineMapper::mapMedicineToMedicineDto)
-                .collect(Collectors.toList());
-
-    }
-
-    @Override
-    public AddressDto findLoggedPatientAddres(Principal principal) {
-
-        Patient patient = patientRepository.findByLogin(principal.getName());
-
-        return AddressMapper.mapAddressToAddressDto(patient.getAddress());
-    }
-
-    @Override
-    public void deleteMedicine(Long id, Long medicineId) {
-
-        Patient patient = patientRepository.findById(id).
-                orElseThrow(() -> new NotFoundException("Could not find patient with id: "+id));
-
-        Medicine medicine = medicineRepository.findById(medicineId)
-                .orElseThrow(() -> new NotFoundException("Could not find medicine with id:"+medicineId));
-
-        patient.getMedicineList().remove(medicine);
-
-        patientRepository.save(patient);
-
-
-    }
-
-
 
 }

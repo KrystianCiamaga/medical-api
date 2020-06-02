@@ -110,7 +110,7 @@ public class Demo implements CommandLineRunner {
 
         //patient.setDoctor(doctor);
 
-        patient.setMedicineList(Collections.singletonList(medicine));
+       // patient.setMedicineList(Collections.singletonList(medicine));
 
 
 
@@ -124,14 +124,16 @@ public class Demo implements CommandLineRunner {
         patient2.setActive(true);
         patient2.setEmail("jagoda@o2.pl");
 
-        patient2.setMedicineList(List.of(medicine,medicine2,medicine3,medicine4));
+        patient2.setMedicineList(List.of(medicine));
 
         patient2.setDoctor(doctor2);
+
+        medicine.setPatients(Collections.singletonList(patient2));
 
 
         ////////////////////////////////////////////////////////////////////////////
 
-        doctor.setPatientList(List.of(patient));
+        //doctor.setPatientList(List.of(patient));
 
         doctor2.setPatientList(List.of(patient2));
 
@@ -173,8 +175,10 @@ public class Demo implements CommandLineRunner {
 
         doctorRepository.save(doctor2);
 
+        medicineRepository.save(medicine4);
 
-        //patientRepository.save(patient);
+
+        patientRepository.save(patient);
         patientRepository.save(patient2);
 
 

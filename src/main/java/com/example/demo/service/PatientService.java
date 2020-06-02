@@ -12,10 +12,7 @@ public interface PatientService {
 
     List<PatientDto> findAll();
     PatientDto findById(Long id);
-    void addMedicine(Long id, MedicineDto medicineDto);
-    List<MedicineDto> getLoggedPatientMedicines(Principal principal);
-    AddressDto findLoggedPatientAddres(Principal principal);
-    void deleteMedicine(Long paientId, Long medicineId);
+
 
 
 

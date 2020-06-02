@@ -6,6 +6,7 @@ import com.example.demo.dto.UserReadDto;
 import com.example.demo.email.MailService;
 import com.example.demo.entity.Token;
 import com.example.demo.entity.User;
+import com.example.demo.exception.AlreadyExistsException;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.repository.DoctorRepository;
 import com.example.demo.repository.TokenRepository;
@@ -41,11 +42,11 @@ public class UserServiceImpl implements UserService {
     public void saveUser(UserCreateDto user) throws Exception {
 
         if(user.getRole() == null || user.getRole().isEmpty()) {
-            throw new Exception("User must have at least a role set!");
+            throw new Exception("User must have at least  a one  role set!");
         }
 
         if(userRepository.findByLogin(user.getLogin()) !=null){
-            throw new Exception("User with this login already exists");
+            throw new AlreadyExistsException("User with this login already exists");
         }
 
         User user1 = UserMapper.mapUserCreateDtoToUser(user);

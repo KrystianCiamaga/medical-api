@@ -21,7 +21,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<PatientDto> getAll(){
         return patientService.findAll();
     }
@@ -31,35 +31,5 @@ public class PatientController {
 
         return patientService.findById(id);
     }
-
-
-    @PreAuthorize("hasRole('ROLE_DOCTOR')")
-    @PostMapping("/add-medicine/{id}")
-    public void addMedicine(@PathVariable Long id, @RequestBody MedicineDto medicineDto){
-
-        patientService.addMedicine(id,medicineDto);
-    }
-
-    @PreAuthorize("hasRole('ROLE_DOCTOR')")
-    @DeleteMapping("/{patientId}/remove-medicine/{medicineId}")
-    public void deleteMedicine(@PathVariable Long patientId, @PathVariable Long medicineId){
-
-        patientService.deleteMedicine(patientId,medicineId);
-    }
-
-    @GetMapping("/accounts/medicines")
-    public List<MedicineDto> getAllLoggedPatientMedicines(Principal principal){
-
-        return patientService.getLoggedPatientMedicines(principal);
-
-    }
-
-    @GetMapping("/accounts/address")
-    public AddressDto getLoggedPatientAddress(Principal principal){
-        return patientService.findLoggedPatientAddres(principal);
-    }
-
-
-
 
 }
