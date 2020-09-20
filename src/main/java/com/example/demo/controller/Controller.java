@@ -5,11 +5,6 @@ public class Controller {
 
 
     eagdgaegds
-    egaegaeg
-            easgasrhsdtj
-    tsjstrj
-                    tjsjtsf
-geasgadsgasgse!!!!!!!!!!!
 
     gaesg
             rasg
@@ -19,6 +14,6 @@ eaesg
 
 
 
-            DRUGA ZMIANA!!!!1
+    MOOOOOOOOJA ZMIANA
 
 }
